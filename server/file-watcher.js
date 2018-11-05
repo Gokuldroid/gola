@@ -22,7 +22,7 @@ class FileWatcher {
   on(listener,event = 'all'){
     this.watch();
     this.watcher.on(event, (event, path) => {
-      listener(event, fileUtils.relPath(this.golaServer.gola, path));
+      listener(event, fileUtils.absPath(this.golaServer.gola, path));
     });
   }
 }

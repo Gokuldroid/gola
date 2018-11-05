@@ -31,15 +31,15 @@ class Content {
 
     initDefaults() {
         this.layout = this.layout || 'index';
-        this.title = this.title || this.collection.gola.title;
+        this.title = this.title || this.collection.gola.config.title;
     }
 
     get name() {
-        let relPath = this.path.substring(this.path.indexOf('/content/') + 9);
-        return relPath.substring(0, relPath.length - 3);
+        let absPath = this.path.substring(this.path.indexOf('/content/') + 9);
+        return absPath.substring(0, absPath.length - 3);
     }
 
-    htmlRelPath() {
+    htmlabsPath() {
         return this.collection.name + "/" + this.name + ".html";
     }
 
@@ -52,7 +52,7 @@ class Content {
     }
 
     writeHtmlToFile(htmlContent) {
-        let htmlPath = fileUtils.relPath(this.collection.gola, '_site/' + this.htmlRelPath());
+        let htmlPath = fileUtils.absPath(this.collection.gola, '_site/' + this.htmlabsPath());
         fileUtils.writeFile(htmlPath, htmlContent);
     }
 

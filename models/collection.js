@@ -8,7 +8,7 @@ class Collection {
     constructor(options = {}, gola) {
         this.gola = gola;
         _.extend(this, options);
-        this.collectionPath = options['collectionPath'] || fileUtils.relPath(gola, `collections/${this.name}/`);
+        this.collectionPath = options['collectionPath'] || fileUtils.absPath(gola, `collections/${this.name}/`);
         this._globOptions = { cwd: this.collectionPath, absolute: true };
         this.initPartials();
         this.initLayouts();

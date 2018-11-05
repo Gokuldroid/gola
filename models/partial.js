@@ -10,8 +10,8 @@ class Partial {
     }
 
     get name() {
-        let relPath = this.path.substring(this.path.indexOf('/partials/') + 1);
-        return relPath.substring(0, relPath.length - 4);
+        let absPath = this.path.substring(this.path.indexOf('/partials/') + 1);
+        return absPath.substring(0, absPath.length - 4);
     }
 
     registerPartial() {

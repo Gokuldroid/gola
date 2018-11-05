@@ -12,9 +12,9 @@ class GloaServer {
     serve() {
         this.watchFiles();
         let port = this.port || 4000;
-        console.log(`Serving files from :: ${fileUtils.relPath(this.gola, '_site')} at http://localhost:${port}`);
+        console.log(`Serving files from :: ${fileUtils.absPath(this.gola, '_site')} at http://localhost:${port}`);
         var app = express();
-        app.use(serveStatic(fileUtils.relPath(this.gola, '_site'), { 'index': [this.index || 'index.html'] }))
+        app.use(serveStatic(fileUtils.absPath(this.gola, '_site'), { 'index': [this.index || 'index.html'] }))
         app.listen(port);
     }
 
