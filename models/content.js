@@ -1,7 +1,9 @@
 const _ = require('lodash');
 const fm = require('front-matter');
+const md5 = require('md5');
+
 const fileUtils = require('../core/file');
-const showdown  = require('showdown');
+const showdown = require('showdown');
 const converter = new showdown.Converter();
 const handlebars = require('handlebars')
 
@@ -10,16 +12,24 @@ class Content {
     constructor(options, collection) {
         _.extend(this, options);
         this.collection = collection;
+        this._md5sum = null;
         this.compile();
     }
 
     parseOptions() {
-        let markdownContent = fm(fileUtils.readFile(this.path));
-        _.extend(this, markdownContent.attributes);
-        this.body = new handlebars.SafeString(converter.makeHtml(markdownContent.body));
+        let fileContent = fileUtils.readFile(this.path);
+        let markdownContent = fm(fileContent);
+        let newmd5sum = md5(fileContent);
+        if (newmd5sum != this._md5sum) {
+            _.extend(this, markdownContent.attributes);
+            this.body = new handlebars.SafeString(converter.makeHtml(markdownContent.body));
+            this._md5sum = newmd5sum;
+            return true;
+        }
+        return false;
     }
 
-    initDefaults(){
+    initDefaults() {
         this.layout = this.layout || 'index';
         this.title = this.title || this.collection.gola.title;
     }
@@ -34,9 +44,11 @@ class Content {
     }
 
     compile() {
-        this.parseOptions();
-        this.initDefaults();
-        this.writeHtmlToFile(this.layoutHandler().compile(this));
+        if (this.parseOptions()) {
+            console.log("Compling file :" + this.name);
+            this.initDefaults();
+            this.writeHtmlToFile(this.layoutHandler().compile(this));
+        }
     }
 
     writeHtmlToFile(htmlContent) {

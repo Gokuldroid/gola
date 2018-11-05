@@ -17,7 +17,7 @@ class Collection {
 
     compile() {
         this.content.forEach((con) => {
-            this.compile();
+            con.compile();
         });
     }
 }
