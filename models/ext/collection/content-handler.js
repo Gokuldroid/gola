@@ -6,7 +6,9 @@ const Content = require('../../content');
 const contentHandler = {
     initContent() {
         this.content = _.map(glob.sync('content/**/*.md', this._globOptions), (path) => {
-            return new Content({ path: path }, this);
+            let content = new Content({ path: path }, this);
+            this.registerForChange(path, content);
+            return content;
         });
     }
 }

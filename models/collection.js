@@ -10,7 +10,6 @@ class Collection {
         _.extend(this, options);
         this.collectionPath = options['collectionPath'] || fileUtils.relPath(gola, `collections/${this.name}/`);
         this._globOptions = { cwd: this.collectionPath, absolute: true };
-        this._layoutNameCache = {};
         this.initPartials();
         this.initLayouts();
         this.initContent();
@@ -18,18 +17,8 @@ class Collection {
 
     compile() {
         this.content.forEach((con) => {
-            this.writeHtmlToFile(con);
+            this.compile();
         });
-    }
-
-    writeHtmlToFile(content) {
-        let htmlContent = content.compile();
-        let htmlPath = fileUtils.relPath(this.gola, '_site/' + content.htmlRelPath());
-        fileUtils.writeFile(htmlPath, htmlContent);
-    }
-
-    getLayout(name) {
-        return this._layoutNameCache[name];
     }
 }
 

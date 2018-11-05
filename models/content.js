@@ -36,7 +36,12 @@ class Content {
     compile() {
         this.parseOptions();
         this.initDefaults();
-        return this.layoutHandler().compile(this);
+        this.writeHtmlToFile(this.layoutHandler().compile(this));
+    }
+
+    writeHtmlToFile(htmlContent) {
+        let htmlPath = fileUtils.relPath(this.collection.gola, '_site/' + this.htmlRelPath());
+        fileUtils.writeFile(htmlPath, htmlContent);
     }
 
     layoutHandler() {

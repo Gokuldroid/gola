@@ -18,8 +18,9 @@ class Config {
     }
 
     fileChange(event, file) {
-        //TODO : Optimize this;
-        this.compile();
+        this.collections.forEach(collection => {
+            collection.fileChange(event, file);
+        });
     }
 
     compile() {
