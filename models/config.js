@@ -17,7 +17,12 @@ class Config {
         this.collections = _.map(collections, (itr) => { return new Collection(itr, this.gola) });
     }
 
-    compile(){
+    fileChange(event, file) {
+        //TODO : Optimize this;
+        this.compile();
+    }
+
+    compile() {
         this.collections.forEach(collection => {
             collection.compile();
         });

@@ -10,7 +10,11 @@ class Gola {
         return this._config = this._config || new Config(this)
     }
 
-    build(){
+    fileChange(event, file) {
+        this.config.fileChange(event,file);
+    }
+
+    build() {
         this.config;
     }
 }

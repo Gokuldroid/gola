@@ -10,7 +10,6 @@ class Content {
     constructor(options, collection) {
         _.extend(this, options);
         this.collection = collection;
-        this.parseOptions();
         this.compile();
     }
 
@@ -18,6 +17,11 @@ class Content {
         let markdownContent = fm(fileUtils.readFile(this.path));
         _.extend(this, markdownContent.attributes);
         this.body = new handlebars.SafeString(converter.makeHtml(markdownContent.body));
+    }
+
+    initDefaults(){
+        this.layout = this.layout || 'index';
+        this.title = this.title || this.collection.gola.title;
     }
 
     get name() {
@@ -30,6 +34,8 @@ class Content {
     }
 
     compile() {
+        this.parseOptions();
+        this.initDefaults();
         return this.layoutHandler().compile(this);
     }
 
