@@ -30,7 +30,7 @@ class Content {
     }
 
     getGlobals(){
-        return this._globals = this._globals || _.merge({}, this.collection.getGlobals(), {
+        return _.merge({}, this.collection.getGlobals(), {
             content: this
         });
     }
