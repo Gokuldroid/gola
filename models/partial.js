@@ -7,7 +7,7 @@ class Partial {
         _.extend(this, options);
         this.collection = collection;
         this.gloa = collection.gloa;
-        this.registerPartial();
+        this.compile();
     }
 
     get name() {
@@ -15,7 +15,7 @@ class Partial {
         return absPath.substring(0, absPath.length - 4);
     }
 
-    registerPartial() {
+    compile() {
         handlebars.registerPartial(this.name, fileUtils.readFile(this.path));
     }
 }

@@ -9,7 +9,7 @@ class Collection {
         this.config = config;
         this.gola = config.gola;
         _.extend(this, options);
-        this.collectionPath = options['collectionPath'] || fileUtils.absPath(gola, `collections/${this.name}/`);
+        this.collectionPath = options['collectionPath'] || fileUtils.absPath(this.gola, `collections/${this.name}/`);
         this._globOptions = { cwd: this.collectionPath, absolute: true };
         this.initPartials();
         this.initLayouts();

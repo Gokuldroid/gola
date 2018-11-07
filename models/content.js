@@ -53,7 +53,7 @@ class Content {
         if (this.parseOptions()) {
             console.log("Compling file :" + this.name);
             this.initDefaults();
-            this.writeHtmlToFile(this.layoutHandler().compile(this.getGlobals()));
+            this.writeHtmlToFile(this.layoutHandler().layout(this.getGlobals()));
         }
     }
 

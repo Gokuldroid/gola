@@ -6,7 +6,9 @@ const Partial = require('../../partial');
 const partialHandler = {
     initPartials() {
         this.partials = _.map(glob.sync('partials/**/*.hbs', this._globOptions), (path) => {
-            return new Partial({ path: path }, this);
+            let partial = new Partial({ path: path }, this);
+            this.registerForChange(path, partial);
+            return partial;
         });
     }
 }

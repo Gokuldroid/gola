@@ -17,8 +17,8 @@ class Layout {
         return this._layout = this._layout || handlebars.compile(fileUtils.readFile(this.path));
     }
 
-    compile(options) {
-        return this.layout(options);
+    compile() {
+        return this._layout = handlebars.compile(fileUtils.readFile(this.path));
     }
 }
 
