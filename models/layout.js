@@ -6,6 +6,7 @@ class Layout {
     constructor(options = {}, collection) {
         _.extend(this, options);
         this.collection = collection;
+        this.gola = collection.gola;
     }
 
     get name() {

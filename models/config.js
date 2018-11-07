@@ -10,8 +10,15 @@ class Config {
     constructor(gola) {
         this.gola = gola;
         _.extend(this, fileUtils.readJson(fileUtils.absPath(gola, 'config.json')));
-        this.static = new Static(gola, this);
+        this.static = new Static(this);
         this.initCollections();
+    }
+
+
+    getGlobals() {
+        return this._globals = this._globals || _.merge({}, this.gola.getGlobals(), {
+            config: this
+        });
     }
 
     fileChange(event, file) {

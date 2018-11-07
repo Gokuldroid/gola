@@ -2,9 +2,9 @@ const glob = require('glob');
 const fileUtils = require('../core/file');
 
 class Static {
-    constructor(gola, config) {
-        this.gola = gola;
+    constructor(config) {
         this.config = config;
+        this.gola = config.gola;
         this.filesPattern = /^(?!(collections|layouts|partials|config\.json)).+/g;
         this._globOptions = { cwd: this.gola.rootPath, absolute: true };
     }

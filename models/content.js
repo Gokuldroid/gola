@@ -12,8 +12,8 @@ class Content {
     constructor(options, collection) {
         _.extend(this, options);
         this.collection = collection;
+        this.gola = collection.gola;
         this._md5sum = null;
-        this.compile();
     }
 
     parseOptions() {
@@ -27,6 +27,12 @@ class Content {
             return true;
         }
         return false;
+    }
+
+    getGlobals(){
+        return this._globals = this._globals || _.merge({}, this.collection.getGlobals(), {
+            content: this
+        });
     }
 
     initDefaults() {
@@ -47,7 +53,7 @@ class Content {
         if (this.parseOptions()) {
             console.log("Compling file :" + this.name);
             this.initDefaults();
-            this.writeHtmlToFile(this.layoutHandler().compile(this));
+            this.writeHtmlToFile(this.layoutHandler().compile(this.getGlobals()));
         }
     }
 

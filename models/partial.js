@@ -6,6 +6,7 @@ class Partial {
     constructor(options, collection) {
         _.extend(this, options);
         this.collection = collection;
+        this.gloa = collection.gloa;
         this.registerPartial();
     }
 
