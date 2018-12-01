@@ -22,11 +22,10 @@ class Config {
     }
 
     fileChange(event, file) {
-        if (!this.static.fileChange(event, file)) {
-            this.collections.forEach(collection => {
-                collection.fileChange(event, file);
-            });
-        }
+        this.static.fileChange(event, file);
+        this.collections.forEach(collection => {
+            collection.fileChange(event, file);
+        });
     }
 
     compile() {

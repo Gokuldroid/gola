@@ -1,12 +1,16 @@
+const _ = require('lodash');
 
 const fileHandler = {
-    _filesObserver: {},
+    _filesObservers: {},
     fileChange(event, file) {
-        this._filesObserver[file] && this._filesObserver[file].compile();
+        _.each(this._filesObservers[file],function(observer) {
+           observer.compile(); 
+        });
     },
 
     registerForChange(file,observer) {
-        this._filesObserver[file] = observer;
+        this._filesObserver[file] = this._filesObserver[file] || [];
+        this._filesObserver[file].push(observer);
     }
 }
 
