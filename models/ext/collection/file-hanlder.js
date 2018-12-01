@@ -9,8 +9,8 @@ const fileHandler = {
     },
 
     registerForChange(file,observer) {
-        this._filesObserver[file] = this._filesObserver[file] || [];
-        this._filesObserver[file].push(observer);
+        this._filesObservers[file] = this._filesObservers[file] || [];
+        this._filesObservers[file].push(observer);
     }
 }
 
