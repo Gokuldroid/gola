@@ -1,16 +1,7 @@
 const _ = require('lodash');
-const fm = require('front-matter');
-const md5 = require('md5');
 
 const fileUtils = require('../core/file');
-const showdown = require('showdown');
-const showdownHighlight = require("showdown-highlight")
-const converter = new showdown.Converter({extensions: [showdownHighlight]});
-const handlebars = require('handlebars')
-
-converter.setOption('tables', true);
-converter.setOption('ghCodeBlocks', true);
-converter.setOption('parseImgDimensions', true);
+const handlebars = require('handlebars');
 
 class Content {
     constructor(options, collection) {
@@ -21,13 +12,11 @@ class Content {
     }
 
     parseOptions() {
-        let fileContent = fileUtils.readFile(this.path);
-        let markdownContent = fm(fileContent);
-        let newmd5sum = md5(fileContent);
-        if (newmd5sum != this._md5sum) {
+        let markdownContent = fileUtils.mdToHtml(this.path);
+        if (markdownContent.md5sum != this._md5sum) {
             _.extend(this, markdownContent.attributes);
-            this.body = new handlebars.SafeString(converter.makeHtml(markdownContent.body));
-            this._md5sum = newmd5sum;
+            this.body = new handlebars.SafeString(markdownContent.html);
+            this._md5sum = markdownContent.md5sum;
             return true;
         }
         return false;

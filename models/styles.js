@@ -18,12 +18,7 @@ class Styles {
 
     _compileSass() {
         console.log('compiling scss');
-        const sassOptions = {
-            file: fileUtils.absPath(this.gola, '_site/static/css/main.scss'),
-            sourceMapEmbed: true
-        };
-        let result = sass.renderSync(sassOptions);
-        fileUtils.writeFile(fileUtils.absPath(this.gola, '_site/static/css/main.css'), result.css);
+        fileUtils.compileSass(fileUtils.absPath(this.gola, '_site/static/css/main.scss'),fileUtils.absPath(this.gola, '_site/static/css/main.css'));
     }
 }
 
