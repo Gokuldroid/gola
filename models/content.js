@@ -4,9 +4,12 @@ const md5 = require('md5');
 
 const fileUtils = require('../core/file');
 const showdown = require('showdown');
-const converter = new showdown.Converter();
+const showdownHighlight = require("showdown-highlight")
+const converter = new showdown.Converter({extensions: [showdownHighlight]});
 const handlebars = require('handlebars')
 
+converter.setOption('tables', true);
+converter.setOption('ghCodeBlocks', true);
 
 class Content {
     constructor(options, collection) {

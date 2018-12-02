@@ -26,6 +26,7 @@
     "mkdirp": "^0.5.1",
     "node-sass": "^4.10.0",
     "serve-static": "^1.13.2",
-    "showdown": "^1.8.7"
+    "showdown": "^1.8.7",
+    "showdown-highlight": "^2.1.3"
   }
 }

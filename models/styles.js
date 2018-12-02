@@ -17,7 +17,7 @@ class Styles {
     }
 
     _compileSass() {
-        console.log('complie scss');
+        console.log('compiling scss');
         const sassOptions = {
             file: fileUtils.absPath(this.gola, '_site/static/css/main.scss'),
             sourceMapEmbed: true
