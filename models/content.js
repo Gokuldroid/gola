@@ -10,6 +10,7 @@ const handlebars = require('handlebars')
 
 converter.setOption('tables', true);
 converter.setOption('ghCodeBlocks', true);
+converter.setOption('parseImgDimensions', true);
 
 class Content {
     constructor(options, collection) {
